@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Practice for the Performing Arts">
+  <rect width="512" height="512" rx="112" fill="#FA5537"/>
+  <g fill="none" stroke="#FBEDDD" stroke-width="44" stroke-linecap="round">
+    <line x1="182" y1="150" x2="182" y2="406"/>
+    <circle cx="247" cy="238" r="65"/>
+  </g>
+</svg>

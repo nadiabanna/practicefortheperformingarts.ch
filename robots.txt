@@ -1,0 +1,5 @@
+# Practice for the Performing Arts
+User-agent: *
+Allow: /
+
+Sitemap: https://www.practicefortheperformingarts.ch/sitemap.xml
