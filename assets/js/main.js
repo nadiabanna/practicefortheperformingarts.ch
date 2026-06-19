@@ -3,6 +3,22 @@
   'use strict';
   var doc = document.documentElement;
 
+  /* ----- Localised UI strings (used by the form interactions below) ----- */
+  var isDe = (doc.lang || 'en').toLowerCase().indexOf('de') === 0;
+  var L = isDe ? {
+    sending: 'Wird gesendet…',
+    success: 'Vielen Dank. Ihre Nachricht wurde gesendet, wir melden uns in Kürze.',
+    error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt eine E-Mail.',
+    errorShort: 'Etwas ist schiefgelaufen. Bitte schreiben Sie uns direkt eine E-Mail.',
+    network: 'Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder schreiben Sie uns direkt.'
+  } : {
+    sending: 'Sending…',
+    success: 'Thank you. Your message has been sent, and we will be in touch shortly.',
+    error: 'Something went wrong. Please try again or email us directly.',
+    errorShort: 'Something went wrong. Please email us directly.',
+    network: 'Network error. Please check your connection or email us directly.'
+  };
+
   /* ----- Mobile navigation ----- */
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
@@ -59,7 +75,7 @@
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       if (status) { status.className = 'form-status'; }
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      if (btn) { btn.disabled = true; btn.textContent = L.sending; }
 
       fetch(form.action, {
         method: 'POST',
@@ -68,17 +84,16 @@
       }).then(function (res) {
         if (res.ok) {
           form.reset();
-          show('is-success', form.getAttribute('data-success') ||
-            'Thank you. Your message has been sent, and we will be in touch shortly.');
+          show('is-success', form.getAttribute('data-success') || L.success);
         } else {
           res.json().then(function (data) {
             var msg = (data && data.errors) ? data.errors.map(function (x) { return x.message; }).join(', ')
-              : 'Something went wrong. Please try again or email us directly.';
+              : L.error;
             show('is-error', msg);
-          }).catch(function () { show('is-error', 'Something went wrong. Please email us directly.'); });
+          }).catch(function () { show('is-error', L.errorShort); });
         }
       }).catch(function () {
-        show('is-error', 'Network error. Please check your connection or email us directly.');
+        show('is-error', L.network);
       }).finally(function () {
         if (btn) { btn.disabled = false; btn.textContent = btnText; }
       });

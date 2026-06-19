@@ -377,9 +377,21 @@ em { font-style: italic; }
 .footer-links a:hover { color: var(--cream); border-color: var(--coral); }
 .footer-contact a { color: var(--cream); border-bottom: 1px solid var(--coral); }
 .footer-bottom { margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem); padding-top: 1.6rem; border-top: 1px solid rgba(251,237,221,0.16);
-  display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; justify-content: space-between; font-size: 0.85rem; color: #b6a795; }
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.5rem; justify-content: space-between; font-size: 0.85rem; color: #b6a795; }
 .footer-bottom a { color: #b6a795; }
 .footer-bottom a:hover { color: var(--cream); }
+.footer-legal { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.footer-bottom .lang-switch { display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--font-head); font-size: 1rem; letter-spacing: 0.06em; color: #cdbfae; }
+.footer-bottom .lang-switch::before { content: ""; flex: 0 0 auto; width: 1.05em; height: 1.05em;
+  background: var(--coral);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='1.8'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='12'%20cy='12'%20r='9'/%3E%3Cpath%20d='M3%2012h18'/%3E%3Cpath%20d='M12%203c3%203%203%2015%200%2018M12%203c-3%203-3%2015%200%2018'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='1.8'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='12'%20cy='12'%20r='9'/%3E%3Cpath%20d='M3%2012h18'/%3E%3Cpath%20d='M12%203c3%203%203%2015%200%2018M12%203c-3%203-3%2015%200%2018'/%3E%3C/svg%3E") center/contain no-repeat; }
+.footer-bottom .lang-switch__current { color: var(--cream); font-weight: 600; }
+.footer-bottom .lang-switch__sep { color: rgba(251,237,221,0.35); }
+.footer-bottom .lang-switch__link { color: #e7dccd; border-bottom: 1px solid transparent; transition: color 0.25s, border-color 0.25s; }
+.footer-bottom .lang-switch__link:hover { color: var(--cream); border-bottom-color: var(--coral); }
 
 /* ---------- Scroll reveal (only when JS is present, so no-JS users see all) ---------- */
 .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
