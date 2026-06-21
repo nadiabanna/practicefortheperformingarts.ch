@@ -23,20 +23,27 @@
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
   if (toggle && nav) {
+    var overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(overlay);
+
+    var closeNav = function () {
+      doc.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+
     toggle.addEventListener('click', function () {
       var open = doc.classList.toggle('nav-open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     nav.addEventListener('click', function (e) {
-      if (e.target.closest('a')) {
-        doc.classList.remove('nav-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
+      if (e.target.closest('a')) { closeNav(); }
     });
+    overlay.addEventListener('click', closeNav);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && doc.classList.contains('nav-open')) {
-        doc.classList.remove('nav-open');
-        toggle.setAttribute('aria-expanded', 'false');
+        closeNav();
         toggle.focus();
       }
     });
