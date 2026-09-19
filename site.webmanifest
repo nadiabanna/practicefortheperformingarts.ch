@@ -1,7 +1,9 @@
 {
   "name": "Practice for the Performing Arts",
   "short_name": "Practice PA",
-  "description": "Medical and complementary care for performing artists in Zürich.",
+  "description": "Medizinische und komplementäre Betreuung für darstellende Künstler in Zürich.",
+  "lang": "de-CH",
+  "dir": "ltr",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
