@@ -6,17 +6,25 @@
   /* ----- Localised UI strings (used by the form interactions below) ----- */
   var isDe = (doc.lang || 'en').toLowerCase().indexOf('de') === 0;
   var L = isDe ? {
+    menuOpen: 'Menü öffnen',
+    menuClose: 'Menü schliessen',
     sending: 'Wird gesendet…',
     success: 'Vielen Dank. Ihre Nachricht wurde gesendet, wir melden uns in Kürze.',
     error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt eine E-Mail.',
     errorShort: 'Etwas ist schiefgelaufen. Bitte schreiben Sie uns direkt eine E-Mail.',
-    network: 'Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder schreiben Sie uns direkt.'
+    network: 'Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder schreiben Sie uns direkt.',
+    required: 'Bitte füllen Sie dieses Feld aus.',
+    invalidEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
   } : {
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
     sending: 'Sending…',
     success: 'Thank you. Your message has been sent, and we will be in touch shortly.',
     error: 'Something went wrong. Please try again or email us directly.',
     errorShort: 'Something went wrong. Please email us directly.',
-    network: 'Network error. Please check your connection or email us directly.'
+    network: 'Network error. Please check your connection or email us directly.',
+    required: 'Please fill out this field.',
+    invalidEmail: 'Please enter a valid email address.'
   };
 
   /* ----- Mobile navigation ----- */
@@ -28,25 +36,63 @@
     overlay.setAttribute('aria-hidden', 'true');
     document.body.appendChild(overlay);
 
-    var closeNav = function () {
-      doc.classList.remove('nav-open');
-      toggle.setAttribute('aria-expanded', 'false');
+    var setNav = function (open) {
+      doc.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? L.menuClose : L.menuOpen);
+    };
+    var closeNav = function () { setNav(false); };
+
+    /* the toggle plus everything inside the open panel, in document order */
+    var trapStops = function () {
+      return [toggle].concat(Array.prototype.slice.call(
+        nav.querySelectorAll('a[href], button:not([disabled])')
+      ));
     };
 
     toggle.addEventListener('click', function () {
-      var open = doc.classList.toggle('nav-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      setNav(!doc.classList.contains('nav-open'));
     });
     nav.addEventListener('click', function (e) {
       if (e.target.closest('a')) { closeNav(); }
     });
     overlay.addEventListener('click', closeNav);
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && doc.classList.contains('nav-open')) {
+      if (!doc.classList.contains('nav-open')) { return; }
+
+      if (e.key === 'Escape') {
         closeNav();
         toggle.focus();
+        return;
+      }
+
+      /* keep focus inside the panel so it cannot wander onto the hidden page */
+      if (e.key === 'Tab') {
+        var stops = trapStops();
+        if (!stops.length) { return; }
+        var first = stops[0];
+        var last = stops[stops.length - 1];
+        var active = document.activeElement;
+
+        if (stops.indexOf(active) === -1) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+        } else if (e.shiftKey && active === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
+
+    /* leaving the mobile breakpoint puts the nav back in the header, so drop
+       the open state rather than leaving the scroll lock and trap in place */
+    var mq = window.matchMedia('(max-width: 940px)');
+    var onBreakpoint = function (e) { if (!e.matches) { closeNav(); } };
+    if (mq.addEventListener) { mq.addEventListener('change', onBreakpoint); }
+    else if (mq.addListener) { mq.addListener(onBreakpoint); }
   }
 
   /* ----- Header shadow on scroll ----- */
@@ -72,11 +118,28 @@
     }
   }
 
+  /* ----- Localised constraint-validation messages -----
+     The browser writes its own bubble text in the browser's UI language, not
+     the page's, so a German page can show English (and the reverse). Override
+     it so the message always matches the page the visitor is reading. */
+  document.querySelectorAll('form[data-ajax] input, form[data-ajax] textarea').forEach(function (el) {
+    el.addEventListener('invalid', function () {
+      /* clear first so validity re-evaluates against the native constraints */
+      el.setCustomValidity('');
+      if (el.validity.valid) { return; }
+      if (el.validity.valueMissing) { el.setCustomValidity(L.required); }
+      else if (el.validity.typeMismatch && el.type === 'email') { el.setCustomValidity(L.invalidEmail); }
+    });
+    /* a non-empty custom message keeps the field invalid, so drop it on edit */
+    el.addEventListener('input', function () { el.setCustomValidity(''); });
+  });
+
   /* ----- Formspree AJAX submit (graceful fallback to normal POST) ----- */
   document.querySelectorAll('form[data-ajax]').forEach(function (form) {
     var status = form.querySelector('.form-status');
     var btn = form.querySelector('[type="submit"]');
-    var btnText = btn ? btn.textContent : '';
+    /* keep the markup, not just the text, so the arrow span survives a submit */
+    var btnMarkup = btn ? btn.innerHTML : '';
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -102,7 +165,7 @@
       }).catch(function () {
         show('is-error', L.network);
       }).finally(function () {
-        if (btn) { btn.disabled = false; btn.textContent = btnText; }
+        if (btn) { btn.disabled = false; btn.innerHTML = btnMarkup; }
       });
 
       function show(kind, message) {

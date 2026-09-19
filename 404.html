@@ -10,6 +10,7 @@
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
@@ -72,7 +73,7 @@
         </div>
         <div>
           <h2>Get in Touch</h2>
-          <p class="footer-contact"><a href="tel:+41794385987">+41 (0)79 438 59 87</a><br><a href="mailto:nadia@nadiabanna.com">nadia@nadiabanna.com</a></p>
+          <p class="footer-contact"><a href="tel:+41794385987">+41 (0)79 438 59 87</a></p>
           <nav class="footer-links" aria-label="Footer" style="margin-top:1.2rem">
             <a href="/about/">About</a>
             <a href="/services/">Services</a>
@@ -84,8 +85,17 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span data-year>2026</span> Nadia Banna &amp; Dr. med. Florian Pfefferkorn. All rights reserved.</span>
-        <span>Some photography courtesy of <a href="https://www.inherimagephoto.com/" target="_blank" rel="noopener noreferrer">In Her Image Photography</a>.</span>
+        <div class="footer-legal">
+          <span>© <span data-year>2026</span> Nadia Banna &amp; Dr. med. Florian Pfefferkorn. All rights reserved.</span>
+          <span>Some photography courtesy of <a href="https://www.inherimagephoto.com/" target="_blank" rel="noopener noreferrer">In Her Image Photography</a>.</span>
+        </div>
+        <!-- no current language: GitHub Pages serves this one 404 for both /
+             and /de/, so both sides are offered as a way to continue -->
+        <div class="lang-switch" role="group" aria-label="Language / Sprache">
+          <a class="lang-switch__link" href="/" hreflang="en" lang="en">EN</a>
+          <span class="lang-switch__sep" aria-hidden="true">|</span>
+          <a class="lang-switch__link" href="/de/" hreflang="de" lang="de">DE</a>
+        </div>
       </div>
     </div>
   </footer>
