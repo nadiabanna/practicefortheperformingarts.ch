@@ -34,7 +34,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 
@@ -101,7 +102,9 @@
       <div class="container">
         <div class="bio reveal">
           <div class="bio__photo">
-            <img src="/assets/img/portrait-florian.webp" width="1000" height="1328" loading="lazy" alt="Porträt von Dr. med. Florian Pfefferkorn.">
+            <img src="/assets/img/portrait-florian.webp"
+                 srcset="/assets/img/portrait-florian-600.webp 600w, /assets/img/portrait-florian-900.webp 900w, /assets/img/portrait-florian.webp 1000w"
+                 sizes="(min-width: 820px) 414px, 90vw" width="1000" height="1328" loading="lazy" alt="Porträt von Dr. med. Florian Pfefferkorn.">
           </div>
           <div>
             <span class="eyebrow">Florian kennenlernen</span>
@@ -125,7 +128,9 @@
       <div class="container">
         <div class="bio bio--rev reveal">
           <div class="bio__photo">
-            <img src="/assets/img/portrait-nadia.webp" width="1000" height="1000" loading="lazy" alt="Porträt von Nadia Banna.">
+            <img src="/assets/img/portrait-nadia.webp"
+                 srcset="/assets/img/portrait-nadia-600.webp 600w, /assets/img/portrait-nadia-900.webp 900w, /assets/img/portrait-nadia.webp 1000w"
+                 sizes="(min-width: 820px) 414px, 90vw" width="1000" height="1000" loading="lazy" alt="Porträt von Nadia Banna.">
           </div>
           <div>
             <span class="eyebrow">Nadia kennenlernen</span>

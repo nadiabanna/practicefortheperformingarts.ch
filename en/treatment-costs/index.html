@@ -34,7 +34,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -126,10 +127,11 @@
           </div>
           <div class="price-item reveal">
             <h3>Additional Tariffs We May Use</h3>
-            <div class="price-row"><span>Tariff 999: File review / working in the absence of patients</span><span class="amount">CHF 20</span></div>
-            <div class="price-row"><span>Tariff 1253: Formalized report, per 15-minute interval</span><span class="amount">CHF 40</span></div>
-            <div class="price-row"><span>Tariff 1254: Non-formalized report, per 15-minute interval</span><span class="amount">CHF 40</span></div>
-            <div class="price-row"><span>Tariff 1250: Missed consultation, 60 minutes</span><span class="amount">CHF 150</span></div>
+            <div class="price-row"><span>Tariff 999: File review / working in the absence of patients</span><span class="amount">CHF 20.00</span></div>
+            <div class="price-row"><span>Tariff 1253: Formalized report, per 15-minute interval</span><span class="amount">CHF 40.00</span></div>
+            <div class="price-row"><span>Tariff 1254: Non-formalized report, per 15-minute interval</span><span class="amount">CHF 40.00</span></div>
+            <div class="price-row"><span>Tariff 1250: Missed consultation, 60 minutes</span><span class="amount">CHF 150.00</span></div>
+            <p class="form-note" style="margin-top:0.9rem">Tariff 1250 applies to appointments cancelled less than 24 hours in advance, and to appointments not attended. See our <a href="/en/terms-and-conditions/" style="border-bottom:1px solid var(--coral)">Terms &amp; Conditions</a> for details.</p>
           </div>
         </div>
       </div>

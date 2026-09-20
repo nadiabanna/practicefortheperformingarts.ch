@@ -34,7 +34,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -126,10 +127,11 @@
           </div>
           <div class="price-item reveal">
             <h3>Weitere Tarife, die wir verwenden können</h3>
-            <div class="price-row"><span>Tarif 999: Aktenstudium / Arbeit in Abwesenheit des Patienten</span><span class="amount">CHF 20</span></div>
-            <div class="price-row"><span>Tarif 1253: Formalisierter Bericht, pro 15-Minuten-Intervall</span><span class="amount">CHF 40</span></div>
-            <div class="price-row"><span>Tarif 1254: Nicht formalisierter Bericht, pro 15-Minuten-Intervall</span><span class="amount">CHF 40</span></div>
-            <div class="price-row"><span>Tarif 1250: Versäumte Konsultation, 60 Minuten</span><span class="amount">CHF 150</span></div>
+            <div class="price-row"><span>Tarif 999: Aktenstudium / Arbeit in Abwesenheit des Patienten</span><span class="amount">CHF 20.00</span></div>
+            <div class="price-row"><span>Tarif 1253: Formalisierter Bericht, pro 15-Minuten-Intervall</span><span class="amount">CHF 40.00</span></div>
+            <div class="price-row"><span>Tarif 1254: Nicht formalisierter Bericht, pro 15-Minuten-Intervall</span><span class="amount">CHF 40.00</span></div>
+            <div class="price-row"><span>Tarif 1250: Versäumte Konsultation, 60 Minuten</span><span class="amount">CHF 150.00</span></div>
+            <p class="form-note" style="margin-top:0.9rem">Tarif 1250 gilt für Termine, die weniger als 24 Stunden im Voraus abgesagt oder nicht wahrgenommen werden. Einzelheiten finden Sie in unseren <a href="/terms-and-conditions/" style="border-bottom:1px solid var(--coral)">AGB</a>.</p>
           </div>
         </div>
       </div>

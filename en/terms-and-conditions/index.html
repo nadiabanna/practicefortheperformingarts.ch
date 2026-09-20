@@ -33,7 +33,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -89,6 +90,7 @@
 
           <h2>3. Appointments and Inquiries</h2>
           <p>Submitting the contact form or the appointment-request form is a non-binding inquiry and does not constitute a confirmed appointment. An appointment is only confirmed once we reply to you directly. Treatment terms, costs and insurance coverage are as described on the <a href="/en/treatment-costs/">Treatment Costs</a> page and are subject to the applicable statutory tariffs and your individual insurance contract.</p>
+          <p>Please give us at least <strong>24 hours’ notice</strong> if you need to cancel or move a confirmed appointment. Appointments cancelled later than that, and appointments not attended, are billed under Tariff 1250 (missed consultation) as shown on the <a href="/en/treatment-costs/">Treatment Costs</a> page. Insurers do not reimburse this charge. If something unforeseeable prevents you from attending, tell us and we will find a fair solution.</p>
 
           <h2>4. Use of the Website</h2>
           <p>You agree to use the Website only for lawful purposes and not to misuse it, interfere with its operation, attempt to gain unauthorized access to it, or use it in any way that could damage or impair it or the experience of other users.</p>

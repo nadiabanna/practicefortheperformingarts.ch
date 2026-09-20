@@ -96,6 +96,8 @@
   --ink: #1d1b1a;
   --ink-2: #46403c;        /* secondary text */
   --line: #e4d3bd;         /* hairline on cream */
+  --field-line: #9e7a50;   /* form field edges; 3.7:1 on the card and 3.4:1 on
+                              the field's own fill, per WCAG 1.4.11 */
 
   --font-head: 'Marcellus', 'Georgia', 'Times New Roman', serif;
   --font-body: 'PT Serif', 'Georgia', serif;
@@ -241,17 +243,27 @@ em { font-style: italic; }
 
 .brand { display: inline-flex; flex-direction: column; line-height: 1; }
 .brand__script { font-family: var(--font-body); font-style: italic; font-size: 1.55rem; color: var(--coral); letter-spacing: 0.01em; }
-.brand__sub { font-family: var(--font-head); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--ink); margin-top: 0.18rem; }
+.brand__sub { font-family: var(--font-head); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--ink); margin-top: 0.18rem; white-space: nowrap; }
 
 /* The nav takes the free space, so it sits beside the language button on the
    right rather than being spread apart from it by the flex distribution.
    The gap is capped at 1rem: the container stops growing at 1180px, so a
    vw-based gap would keep widening past it and push the row into wrapping
    on large screens. Together with the 0.93rem links this leaves room for
-   the language button. */
+   the language button.
+
+   nowrap on the labels is load-bearing, not cosmetic. The row is a flex
+   container, so when it runs out of width flex shrinks .nav and the labels
+   break mid-phrase: "Über uns" becomes two stacked lines that read like two
+   separate nav items, and the CTA splits inside its pill. Because a flex row
+   is as tall as its tallest child, that also pushed the header past its 78px
+   min-height, and 78px is hardcoded into the mobile panel's inset and
+   max-height below. Forbidding the wrap converts the failure into an
+   overflow, which the compact band and the burger breakpoint then absorb. */
 .nav { order: 2; margin-left: auto; display: flex; align-items: center; gap: clamp(0.85rem, 0.2rem + 1.1vw, 1rem); }
 .nav__links { display: flex; align-items: center; gap: clamp(0.85rem, 0.2rem + 1.1vw, 1rem); }
-.nav__link { font-size: 0.93rem; position: relative; padding: 0.3rem 0; color: var(--ink); }
+.nav__link { font-size: 0.93rem; position: relative; padding: 0.3rem 0; color: var(--ink); white-space: nowrap; }
+.nav .btn { white-space: nowrap; }
 .nav__link::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1.5px; background: var(--coral); transform: scaleX(0); transform-origin: right; transition: transform 0.32s var(--ease); }
 .nav__link:hover::after, .nav__link[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
 .nav__link[aria-current="page"] { color: var(--coral-deep); }
@@ -291,20 +303,41 @@ em { font-style: italic; }
 .lang-btn__flag--us { width: 21px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 20'%3E%3Crect width='38' height='20' fill='%23fff'/%3E%3Cg fill='%23b22234'%3E%3Crect width='38' height='1.54'/%3E%3Crect y='3.08' width='38' height='1.54'/%3E%3Crect y='6.15' width='38' height='1.54'/%3E%3Crect y='9.23' width='38' height='1.54'/%3E%3Crect y='12.31' width='38' height='1.54'/%3E%3Crect y='15.38' width='38' height='1.54'/%3E%3Crect y='18.46' width='38' height='1.54'/%3E%3C/g%3E%3Crect width='15.2' height='10.77' fill='%233c3b6e'/%3E%3Cg fill='%23fff'%3E%3Ccircle cx='2.5' cy='2' r='.7'/%3E%3Ccircle cx='6.5' cy='2' r='.7'/%3E%3Ccircle cx='10.5' cy='2' r='.7'/%3E%3Ccircle cx='4.5' cy='4.6' r='.7'/%3E%3Ccircle cx='8.5' cy='4.6' r='.7'/%3E%3Ccircle cx='12.5' cy='4.6' r='.7'/%3E%3Ccircle cx='2.5' cy='7.2' r='.7'/%3E%3Ccircle cx='6.5' cy='7.2' r='.7'/%3E%3Ccircle cx='10.5' cy='7.2' r='.7'/%3E%3Ccircle cx='4.5' cy='9.5' r='.7'/%3E%3Ccircle cx='8.5' cy='9.5' r='.7'/%3E%3Ccircle cx='12.5' cy='9.5' r='.7'/%3E%3C/g%3E%3C/svg%3E"); }
 
-@media (max-width: 940px) {
+/* Compact band. Between the burger breakpoint and 1200px the full row fits
+   only once it is trimmed: at the base sizes the nowrapped nav overflows the
+   container instead of wrapping. Shaving the type and the gaps here buys the
+   ~40px needed, so laptops keep the horizontal nav down to 1050px rather than
+   dropping to the burger at every width under 1200px. */
+@media (min-width: 1050px) and (max-width: 1199px) {
+  .nav, .nav__links { gap: 0.7rem; }
+  .nav__link { font-size: 0.82rem; }
+  .nav .btn { font-size: 0.86rem; padding: 0.8em 1.25em; }
+}
+
+/* 1049px, not 940px: German needs 1050px to fit the trimmed row above
+   (English clears at 1000px). Keep this number in sync with the matchMedia
+   query in main.js, which drops the open state when the nav returns to the
+   header. If the two disagree, the menu can be left stuck open at a width
+   where it is no longer a panel. */
+@media (max-width: 1049px) {
   .nav-toggle { display: inline-flex; }
   .nav-open .nav-overlay { display: block; }
   /* hold the page still while the menu is open */
   .nav-open, .nav-open body { overflow: hidden; }
+  /* visibility, not just the transform: translated off-screen alone, the
+     panel stayed focusable and screen-reader visible, so tabbing past the
+     burger walked through six invisible links with no visible focus ring.
+     Transitioning visibility keeps the slide-out animation intact. */
   .nav { position: fixed; inset: 78px 0 auto 0; flex-direction: column; align-items: stretch;
     background: var(--cream); border-bottom: 1px solid var(--line); padding: 1.4rem var(--gutter) 2rem;
-    gap: 0.4rem; transform: translateY(-130%); transition: transform 0.4s var(--ease); box-shadow: var(--shadow);
+    gap: 0.4rem; transform: translateY(-130%); visibility: hidden;
+    transition: transform 0.4s var(--ease), visibility 0.4s var(--ease); box-shadow: var(--shadow);
     /* a phone held in landscape is shorter than the panel, so let the panel
        scroll to its CTA rather than run off the bottom of the screen */
     max-height: calc(100vh - 78px);
     max-height: calc(100dvh - 78px);
     overflow-y: auto; overscroll-behavior: contain; }
-  .nav-open .nav { transform: translateY(0); }
+  .nav-open .nav { transform: translateY(0); visibility: visible; }
   .nav__links { flex-direction: column; align-items: stretch; gap: 0; }
   /* full-width tap bands: as an inline element the link was only as wide as
      its own text, so most of each row did nothing when tapped */
@@ -337,6 +370,13 @@ em { font-style: italic; }
 .hero__badge { position: absolute; bottom: -22px; left: -22px; background: var(--ink); color: var(--cream);
   padding: 1rem 1.3rem; border-radius: 16px; font-family: var(--font-head); line-height: 1.2; box-shadow: var(--shadow-sm); max-width: 60%; }
 .hero__badge strong { color: var(--coral-on-ink); font-weight: 400; }
+/* the -22px overhang runs past the left viewport edge on narrow phones, where
+   body{overflow-x:hidden} clips it rather than letting it scroll. Must sit
+   after the rule above, not up in the header's 420px block, or the base
+   left/bottom win on order. */
+@media (max-width: 430px) {
+  .hero__badge { left: 0; bottom: -16px; max-width: 78%; }
+}
 
 /* page hero (interior) */
 .page-hero { position: relative; padding-block: clamp(3rem, 2rem + 5vw, 6rem) clamp(2rem, 1.5rem + 3vw, 4rem); overflow: hidden; }
@@ -421,9 +461,13 @@ em { font-style: italic; }
 .field { margin-bottom: 1.2rem; }
 .field label { display: block; font-family: var(--font-head); font-size: 0.92rem; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
 .field .req { color: var(--coral-deep); }
+/* --line is right for cards and dividers but only reaches 1.38:1 here, and a
+   form field's edge is a UI component boundary: WCAG 1.4.11 wants 3:1. The
+   cream fill is 1.08:1 against the card, so the border is doing all the work
+   of telling you where the field is. */
 .field input, .field textarea, .field select {
   width: 100%; font-family: var(--font-body); font-size: 1rem; color: var(--ink);
-  background: var(--cream); border: 1.5px solid var(--line); border-radius: 12px; padding: 0.85rem 1rem;
+  background: var(--cream); border: 1.5px solid var(--field-line); border-radius: 12px; padding: 0.85rem 1rem;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 .field textarea { min-height: 140px; resize: vertical; }
@@ -432,10 +476,18 @@ em { font-style: italic; }
 @media (min-width: 620px) { .field-row { grid-template-columns: 1fr 1fr; } }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-note { font-size: 0.9rem; color: var(--ink-2); margin-top: 0.4rem; }
-.form-status { display: none; margin-top: 1.1rem; padding: 0.9rem 1.1rem; border-radius: 12px; font-size: 0.97rem; }
-.form-status.is-visible { display: block; }
+/* The status stays rendered and empty rather than display:none. A live region
+   that is not rendered when its text changes is not announced, and an empty
+   block with no padding or border takes up no space, so nothing moves until
+   there is something to say. */
+.form-status { margin-top: 1.1rem; border-radius: 12px; font-size: 0.97rem; }
+.form-status:empty { margin-top: 0; }
+.form-status.is-visible { padding: 0.9rem 1.1rem; }
 .form-status.is-success { background: #e8f3ea; color: #1f5130; border: 1px solid #bcd9c3; }
 .form-status.is-error { background: #fde8e3; color: #9a2c14; border: 1px solid #f3c3b6; }
+/* the failure messages end in a mailto link, the one place the address is
+   offered on these pages, so it has to read as a link */
+.form-status a { text-decoration: underline; text-underline-offset: 2px; }
 
 /* contact detail blocks */
 .detail-list { display: grid; gap: 1.6rem; }
@@ -465,12 +517,33 @@ em { font-style: italic; }
 /* the phone follows the addresses, so give it the same separation */
 .site-footer address + .footer-contact { margin-top: 1rem; }
 .footer-contact a { color: var(--cream); border-bottom: 1px solid var(--coral); }
+
+/* WCAG 2.2 target size (2.5.8) wants 24x24. These footer links are standalone
+   targets in a nav or on their own line, not words inside a sentence, so the
+   inline exception does not cover them: at 375px they measured 20-23px tall.
+   (The credit link and the one inside .form-note are genuinely inline in a
+   sentence, so they keep the exception and are left alone.)
+
+   The hit area is grown with an overlay rather than padding because all three
+   carry a bottom-border underline; padding would detach that underline from
+   the text. The overlay adds nothing visible and moves nothing. */
+.footer-contact a,
+.footer-legal-links a,
+.footer-bottom .lang-switch__link { position: relative; }
+.footer-contact a::before,
+.footer-legal-links a::before,
+.footer-bottom .lang-switch__link::before {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 100%; min-width: 24px; height: 24px; transform: translate(-50%, -50%);
+}
 .footer-bottom { margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem); padding-top: 1.6rem; border-top: 1px solid rgba(251,237,221,0.16);
   display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.5rem; justify-content: space-between; font-size: 0.85rem; color: #b6a795; }
 .footer-bottom a { color: #b6a795; }
 .footer-bottom a:hover { color: var(--cream); }
 .footer-legal { display: flex; flex-direction: column; gap: 0.4rem; }
-.footer-legal-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.7rem; }
+/* 0.6rem row gap, not 0.3rem: the 24px tap overlays above are taller than the
+   links, so a tighter pitch would make two wrapped rows overlap */
+.footer-legal-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.7rem; }
 
 .footer-bottom .lang-switch { display: inline-flex; align-items: center; gap: 0.45rem;
   font-family: var(--font-head); font-size: 1rem; letter-spacing: 0.06em; color: #cdbfae; }

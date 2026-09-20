@@ -1,21 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.practicefortheperformingarts.ch/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/about/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/work-with-us/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/services/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/treatment-costs/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/booking/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/contact-us/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/privacy-policy/</loc><lastmod>2026-09-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/terms-and-conditions/</loc><lastmod>2026-09-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/about/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/work-with-us/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/services/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/treatment-costs/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/booking/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/contact-us/</loc><lastmod>2026-09-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/privacy-policy/</loc><lastmod>2026-09-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://www.practicefortheperformingarts.ch/en/terms-and-conditions/</loc><lastmod>2026-09-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/about/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/about/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/work-with-us/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/work-with-us/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/work-with-us/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/work-with-us/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/services/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/services/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/services/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/treatment-costs/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/treatment-costs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/treatment-costs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/treatment-costs/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/booking/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/booking/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/booking/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/booking/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/contact-us/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/contact-us/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/contact-us/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/contact-us/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/privacy-policy/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/terms-and-conditions/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/terms-and-conditions/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/about/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/work-with-us/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/work-with-us/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/work-with-us/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/work-with-us/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/services/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/services/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/services/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/treatment-costs/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/treatment-costs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/treatment-costs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/treatment-costs/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/booking/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/booking/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/booking/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/booking/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/contact-us/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/contact-us/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/contact-us/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/contact-us/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/privacy-policy/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.practicefortheperformingarts.ch/en/terms-and-conditions/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.practicefortheperformingarts.ch/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.practicefortheperformingarts.ch/en/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.practicefortheperformingarts.ch/en/terms-and-conditions/"/>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

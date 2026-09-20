@@ -34,7 +34,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -108,7 +109,9 @@
             <p style="margin-top:1rem">Your body is your instrument. The Alexander Technique gives you a way to consciously choose how much tension and effort to use, and how to organize mind and body for maximum creative freedom.</p>
           </div>
           <figure class="media-figure split__media reveal d1">
-            <img src="/assets/img/paint.webp" width="1300" height="794" loading="lazy" alt="An impressionistic painting of a sunset reflected over water." style="aspect-ratio:16/10;object-fit:cover">
+            <img src="/assets/img/paint.webp"
+                 srcset="/assets/img/paint-600.webp 600w, /assets/img/paint-900.webp 900w, /assets/img/paint.webp 1300w"
+                 sizes="(min-width: 880px) 502px, 90vw" width="1300" height="794" loading="lazy" alt="An impressionistic painting of a sunset reflected over water." style="aspect-ratio:16/10;object-fit:cover">
           </figure>
         </div>
         <div class="grid grid-2">
@@ -119,13 +122,13 @@
           </article>
           <article class="card reveal d1">
             <span class="card__kicker">Postural Strain</span>
-            <h3>Unlock your body’s features</h3>
+            <h3>Unlock your body’s potential</h3>
             <p style="margin-top:0.7rem">As a performing artist, your body is extensively used and habits form. The Alexander Technique helps you consciously choose how much tension and effort to use, and how to organize your mind and body for maximum creative freedom.</p>
           </article>
           <article class="card reveal">
             <span class="card__kicker">Anxiety &amp; Stage Fright</span>
             <h3>Meet yourself with presence</h3>
-            <p style="margin-top:0.7rem">Maybe you’ve always struggled with it, or maybe it arose spontaneously and stuck around. Can you reveal your authentic, full self in front of an audience? With the Alexander Technique, you’ll discover a way to meet yourself with presence and empathy, and dissolve the anxiety that is paralysing you.</p>
+            <p style="margin-top:0.7rem">Maybe you’ve always struggled with it, or maybe it arose spontaneously and stuck around. Can you reveal your authentic, full self in front of an audience? With the Alexander Technique, you’ll discover a way to meet yourself with presence and empathy, and dissolve the anxiety that is paralyzing you.</p>
           </article>
           <article class="card reveal d1">
             <span class="card__kicker">Mind &amp; Body</span>

@@ -35,7 +35,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 
@@ -51,7 +52,6 @@
     "image": "https://www.practicefortheperformingarts.ch/assets/img/og-image.jpg",
     "description": "Medizinische und komplementäre Betreuung für darstellende Künstler in Zürich.",
     "telephone": "+41794385987",
-    "priceRange": "$$",
     "areaServed": "Zürich, Schweiz",
     "founder": [
       { "@type": "Person", "name": "Nadia Banna" },
@@ -123,8 +123,8 @@
             </div>
           </div>
           <div class="hero__media reveal d2">
-            <img src="/assets/img/hero-dancer.webp"
-                 srcset="/assets/img/hero-dancer-600.webp 600w, /assets/img/hero-dancer-900.webp 900w, /assets/img/hero-dancer.webp 1200w"
+            <img src="/assets/img/hero-violin.webp"
+                 srcset="/assets/img/hero-violin-600.webp 600w, /assets/img/hero-violin-900.webp 900w, /assets/img/hero-violin.webp 1200w"
                  sizes="(min-width: 900px) 490px, 92vw"
                  width="1200" height="1800" fetchpriority="high" alt="Eine Violine mit einem Schmetterling auf den Saiten, vor dunklem Holz.">
             <span class="hero__badge">Ein Team aus Ärzten und Therapeuten, die <strong>selbst Musiker sind.</strong></span>
@@ -138,7 +138,9 @@
       <div class="container">
         <div class="split split--media-left">
           <figure class="media-figure split__media reveal">
-            <img src="/assets/img/harp.webp" width="1400" height="921" loading="lazy" alt="Eine Harfe im warmen Bühnenlicht.">
+            <img src="/assets/img/harp.webp"
+                 srcset="/assets/img/harp-600.webp 600w, /assets/img/harp-900.webp 900w, /assets/img/harp.webp 1400w"
+                 sizes="(min-width: 880px) 502px, 90vw" width="1400" height="921" loading="lazy" alt="Eine Harfe im warmen Bühnenlicht.">
           </figure>
           <div class="reveal d1">
             <span class="eyebrow">Was wir bieten</span>
@@ -208,7 +210,9 @@
             <p style="margin-top:1rem"><a class="link-arrow" href="/about/">Erfahren Sie mehr über uns und wie wir helfen können →</a></p>
           </div>
           <figure class="media-figure split__media reveal d1">
-            <img src="/assets/img/concert-hall.webp" width="1500" height="1013" loading="lazy" alt="Der prunkvolle, vergoldete Zuschauerraum eines klassischen Opernhauses, gefüllt mit Publikum.">
+            <img src="/assets/img/concert-hall.webp"
+                 srcset="/assets/img/concert-hall-600.webp 600w, /assets/img/concert-hall-900.webp 900w, /assets/img/concert-hall.webp 1500w"
+                 sizes="(min-width: 880px) 502px, 90vw" width="1500" height="1013" loading="lazy" alt="Der prunkvolle, vergoldete Zuschauerraum eines klassischen Opernhauses, gefüllt mit Publikum.">
           </figure>
         </div>
       </div>

@@ -35,7 +35,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 
@@ -43,15 +44,14 @@
   {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
-    "@id": "https://www.practicefortheperformingarts.ch/en/#practice",
+    "@id": "https://www.practicefortheperformingarts.ch/#practice",
     "name": "Practice for the Performing Arts",
-    "url": "https://www.practicefortheperformingarts.ch/en/",
+    "url": "https://www.practicefortheperformingarts.ch/",
     "inLanguage": "en",
     "logo": "https://www.practicefortheperformingarts.ch/icon-512.png",
     "image": "https://www.practicefortheperformingarts.ch/assets/img/og-image.jpg",
     "description": "Medical and complementary care for performing artists in Zürich.",
     "telephone": "+41794385987",
-    "priceRange": "$$",
     "areaServed": "Zürich, Switzerland",
     "founder": [
       { "@type": "Person", "name": "Nadia Banna" },
@@ -123,8 +123,8 @@
             </div>
           </div>
           <div class="hero__media reveal d2">
-            <img src="/assets/img/hero-dancer.webp"
-                 srcset="/assets/img/hero-dancer-600.webp 600w, /assets/img/hero-dancer-900.webp 900w, /assets/img/hero-dancer.webp 1200w"
+            <img src="/assets/img/hero-violin.webp"
+                 srcset="/assets/img/hero-violin-600.webp 600w, /assets/img/hero-violin-900.webp 900w, /assets/img/hero-violin.webp 1200w"
                  sizes="(min-width: 900px) 490px, 92vw"
                  width="1200" height="1800" fetchpriority="high" alt="A violin with a butterfly resting on its strings, against dark wood.">
             <span class="hero__badge">A team of doctors &amp; therapists who are <strong>musicians, too.</strong></span>
@@ -138,7 +138,9 @@
       <div class="container">
         <div class="split split--media-left">
           <figure class="media-figure split__media reveal">
-            <img src="/assets/img/harp.webp" width="1400" height="921" loading="lazy" alt="A harp lit by warm stage light.">
+            <img src="/assets/img/harp.webp"
+                 srcset="/assets/img/harp-600.webp 600w, /assets/img/harp-900.webp 900w, /assets/img/harp.webp 1400w"
+                 sizes="(min-width: 880px) 502px, 90vw" width="1400" height="921" loading="lazy" alt="A harp lit by warm stage light.">
           </figure>
           <div class="reveal d1">
             <span class="eyebrow">What we offer</span>
@@ -178,7 +180,7 @@
           <article class="card reveal">
             <div class="card__icon"><img src="/assets/img/shape-star.png" width="171" height="175" alt=""></div>
             <span class="card__kicker">Our Story</span>
-            <h3>Musicians who became doctors</h3>
+            <h3>Musicians who became doctors and therapists</h3>
             <p>We are musicians ourselves, who are also highly trained doctors and therapists with experience working with performing artists. Our qualifications include an MD specialized in pain therapy and an Alexander Technique complementary therapist.</p>
           </article>
           <article class="card reveal d1">
@@ -208,7 +210,9 @@
             <p style="margin-top:1rem"><a class="link-arrow" href="/en/about/">Learn about us and how we can help →</a></p>
           </div>
           <figure class="media-figure split__media reveal d1">
-            <img src="/assets/img/concert-hall.webp" width="1500" height="1013" loading="lazy" alt="The ornate, gilded auditorium of a classical opera house, filled with an audience.">
+            <img src="/assets/img/concert-hall.webp"
+                 srcset="/assets/img/concert-hall-600.webp 600w, /assets/img/concert-hall-900.webp 900w, /assets/img/concert-hall.webp 1500w"
+                 sizes="(min-width: 880px) 502px, 90vw" width="1500" height="1013" loading="lazy" alt="The ornate, gilded auditorium of a classical opera house, filled with an audience.">
           </figure>
         </div>
       </div>

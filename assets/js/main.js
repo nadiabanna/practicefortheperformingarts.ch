@@ -3,16 +3,33 @@
   'use strict';
   var doc = document.documentElement;
 
-  /* ----- Localised UI strings (used by the form interactions below) ----- */
+  /* Handshake with the inline <head> script. Every .reveal element starts at
+     opacity 0 under `.js` and is only brought back by this file, so if this
+     file never runs, the page stays blank below the fold. The inline script
+     therefore drops `.js` again unless it sees `js-on` within 2.5s.
+
+     The class cannot simply be set here instead: `.js` has to be on the
+     element before the first paint, and this file is deferred, so the content
+     would flash in at full opacity and then be yanked back out. */
+  doc.classList.add('js-on');
+
+  var EMAIL = 'nadia@nadiabanna.com';
+
+  /* ----- Localised UI strings (used by the form interactions below) -----
+     The failure strings end mid-sentence on purpose: show() appends EMAIL as
+     a mailto link when called with withEmail. They tell people to write to us
+     instead, and the address appears nowhere else on these pages, so being
+     told to email with no address would be no help at the one moment it
+     matters. */
   var isDe = (doc.lang || 'en').toLowerCase().indexOf('de') === 0;
   var L = isDe ? {
     menuOpen: 'Menü öffnen',
     menuClose: 'Menü schliessen',
     sending: 'Wird gesendet…',
     success: 'Vielen Dank. Ihre Nachricht wurde gesendet, wir melden uns in Kürze.',
-    error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt eine E-Mail.',
-    errorShort: 'Etwas ist schiefgelaufen. Bitte schreiben Sie uns direkt eine E-Mail.',
-    network: 'Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder schreiben Sie uns direkt.',
+    error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt: ',
+    errorShort: 'Etwas ist schiefgelaufen. Bitte schreiben Sie uns direkt: ',
+    network: 'Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder schreiben Sie uns direkt: ',
     required: 'Bitte füllen Sie dieses Feld aus.',
     invalidEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
   } : {
@@ -20,9 +37,9 @@
     menuClose: 'Close menu',
     sending: 'Sending…',
     success: 'Thank you. Your message has been sent, and we will be in touch shortly.',
-    error: 'Something went wrong. Please try again or email us directly.',
-    errorShort: 'Something went wrong. Please email us directly.',
-    network: 'Network error. Please check your connection or email us directly.',
+    error: 'Something went wrong. Please try again, or email us directly at ',
+    errorShort: 'Something went wrong. Please email us directly at ',
+    network: 'Network error. Please check your connection, or email us directly at ',
     required: 'Please fill out this field.',
     invalidEmail: 'Please enter a valid email address.'
   };
@@ -88,8 +105,10 @@
     });
 
     /* leaving the mobile breakpoint puts the nav back in the header, so drop
-       the open state rather than leaving the scroll lock and trap in place */
-    var mq = window.matchMedia('(max-width: 940px)');
+       the open state rather than leaving the scroll lock and trap in place.
+       Must match the burger media query in styles.css; if the two drift, the
+       menu can be left stuck open at a width where it is no longer a panel. */
+    var mq = window.matchMedia('(max-width: 1049px)');
     var onBreakpoint = function (e) { if (!e.matches) { closeNav(); } };
     if (mq.addEventListener) { mq.addEventListener('change', onBreakpoint); }
     else if (mq.addListener) { mq.addListener(onBreakpoint); }
@@ -144,7 +163,10 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (status) { status.className = 'form-status'; }
+      /* clear the text as well as the state classes: the element stays
+         rendered now, so a message left over from a previous attempt would
+         otherwise sit there unstyled while this one is in flight */
+      if (status) { status.className = 'form-status'; status.textContent = ''; }
       if (btn) { btn.disabled = true; btn.textContent = L.sending; }
 
       fetch(form.action, {
@@ -157,22 +179,36 @@
           show('is-success', form.getAttribute('data-success') || L.success);
         } else {
           res.json().then(function (data) {
-            var msg = (data && data.errors) ? data.errors.map(function (x) { return x.message; }).join(', ')
-              : L.error;
-            show('is-error', msg);
-          }).catch(function () { show('is-error', L.errorShort); });
+            /* Formspree's own wording when it gives us any, ours otherwise.
+               Theirs is field-level validation ("Email is required"), so it
+               does not get the fall-back-to-email tail. */
+            if (data && data.errors) {
+              show('is-error', data.errors.map(function (x) { return x.message; }).join(', '));
+            } else {
+              show('is-error', L.error, true);
+            }
+          }).catch(function () { show('is-error', L.errorShort, true); });
         }
       }).catch(function () {
-        show('is-error', L.network);
+        show('is-error', L.network, true);
       }).finally(function () {
         if (btn) { btn.disabled = false; btn.innerHTML = btnMarkup; }
       });
 
-      function show(kind, message) {
+      /* withEmail appends the address as a real mailto link. It is built as a
+         node rather than interpolated markup on purpose: the Formspree branch
+         above feeds remote strings through this same function, so this must
+         never become innerHTML. */
+      function show(kind, message, withEmail) {
         if (!status) { return; }
-        status.textContent = message;
         status.classList.add('form-status', kind, 'is-visible');
-        status.setAttribute('role', 'status');
+        status.textContent = message;
+        if (withEmail) {
+          var a = document.createElement('a');
+          a.href = 'mailto:' + EMAIL;
+          a.textContent = EMAIL;
+          status.appendChild(a);
+        }
         status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     });

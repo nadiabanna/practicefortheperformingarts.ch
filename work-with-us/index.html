@@ -34,7 +34,8 @@
 
   <link rel="preload" href="/assets/fonts/marcellus-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ptserif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- .js gates the reveal animations; the timer un-gates them if main.js never runs. See main.js. -->
+  <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-on')){d.classList.remove('js');}},2500);})(document.documentElement);</script>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -80,7 +81,9 @@
       <div class="container">
         <div class="split split--media-left">
           <figure class="media-figure media-figure--tall split__media reveal">
-            <img src="/assets/img/silk.webp" width="1400" height="934" loading="lazy" alt="Eine weiche, fliessende abstrakte Form in warmen Pfirsichtönen.">
+            <img src="/assets/img/silk.webp"
+                 srcset="/assets/img/silk-600.webp 600w, /assets/img/silk-900.webp 900w, /assets/img/silk.webp 1400w"
+                 sizes="(min-width: 880px) 502px, 90vw" width="1400" height="934" loading="lazy" alt="Eine weiche, fliessende abstrakte Form in warmen Pfirsichtönen.">
           </figure>
           <div class="reveal d1">
             <span class="eyebrow">Der erste Schritt</span>
@@ -108,7 +111,9 @@
         <div class="grid grid-2">
           <article class="card reveal">
             <figure class="media-figure" style="margin-bottom:1.4rem">
-              <img src="/assets/img/harp.webp" width="1400" height="921" loading="lazy" alt="Eine Harfe im warmen Licht." style="aspect-ratio:16/10;object-fit:cover">
+              <img src="/assets/img/harp.webp"
+                 srcset="/assets/img/harp-600.webp 600w, /assets/img/harp-900.webp 900w, /assets/img/harp.webp 1400w"
+                 sizes="(min-width: 760px) 441px, 84vw" width="1400" height="921" loading="lazy" alt="Eine Harfe im warmen Licht." style="aspect-ratio:16/10;object-fit:cover">
             </figure>
             <h3>Medizinische Leistungen</h3>
             <p style="margin:0.7rem 0 1.2rem">Ob präventiv, behandelnd, informierend oder therapeutisch: Wir bieten ein ganzes Spektrum an Schulmedizin für Künstler.</p>
@@ -116,7 +121,9 @@
           </article>
           <article class="card reveal d1">
             <figure class="media-figure" style="margin-bottom:1.4rem">
-              <img src="/assets/img/petals.webp" width="1200" height="960" loading="lazy" alt="Abstrakte, leuchtend rote und orange Kurven auf dunklem Hintergrund." style="aspect-ratio:16/10;object-fit:cover">
+              <img src="/assets/img/petals.webp"
+                 srcset="/assets/img/petals-600.webp 600w, /assets/img/petals-900.webp 900w, /assets/img/petals.webp 1200w"
+                 sizes="(min-width: 760px) 441px, 84vw" width="1200" height="960" loading="lazy" alt="Abstrakte, leuchtend rote und orange Kurven auf dunklem Hintergrund." style="aspect-ratio:16/10;object-fit:cover">
             </figure>
             <h3>Komplementärtherapie</h3>
             <p style="margin:0.7rem 0 1.2rem">Von darstellenden Künstlern geschätzt für mehr Leistungsfähigkeit, Haltung und Stimmigkeit von Körper und Geist.</p>
