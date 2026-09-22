@@ -146,7 +146,14 @@ ul { list-style: none; padding: 0; }
 :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 4px; }
 
 /* ---------- Typography ---------- */
-h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; }
+/* hyphens is load-bearing on the German pages, not a nicety. German compounds
+   ("Geschäftsbedingungen", "verschreibungspflichtige") are wider than the
+   container below ~400px, and body{overflow-x:hidden} clips the overflow
+   instead of letting it scroll, so the word was cut off mid-stroke rather
+   than wrapping. The dictionary is picked from the page's lang attribute.
+   overflow-wrap is the fallback where no German dictionary ships. */
+h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em;
+  overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
 h1 { font-size: clamp(2.7rem, 1.7rem + 4.4vw, 5.1rem); }
 h2 { font-size: clamp(2.05rem, 1.5rem + 2.4vw, 3.4rem); line-height: 1.12; }
 h3 { font-size: clamp(1.45rem, 1.2rem + 1.1vw, 2rem); }

@@ -60,11 +60,16 @@
     };
     var closeNav = function () { setNav(false); };
 
-    /* the toggle plus everything inside the open panel, in document order */
+    /* the toggle plus everything inside the open panel, in document order.
+       The language button is included even though it lives outside .nav: it
+       stays visible in the header bar while the panel is open (see the mobile
+       block in styles.css), and the Tab handler below pulls focus back out of
+       anything missing from this list, so leaving it out made a control that
+       is on screen unreachable by keyboard for as long as the menu was open. */
     var trapStops = function () {
-      return [toggle].concat(Array.prototype.slice.call(
-        nav.querySelectorAll('a[href], button:not([disabled])')
-      ));
+      return [toggle]
+        .concat(Array.prototype.slice.call(nav.querySelectorAll('a[href], button:not([disabled])')))
+        .concat(Array.prototype.slice.call(document.querySelectorAll('.site-header .lang-btn')));
     };
 
     toggle.addEventListener('click', function () {
@@ -161,6 +166,11 @@
     var btnMarkup = btn ? btn.innerHTML : '';
 
     form.addEventListener('submit', function (e) {
+      /* This is the fallback the heading above promises, and it has to come
+         before preventDefault: cancelling the submit and only then finding
+         there is no fetch to send it with would lose the message silently,
+         on the only way a visitor can reach the practice from the site. */
+      if (!window.fetch) { return; }
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       /* clear the text as well as the state classes: the element stays
