@@ -164,6 +164,12 @@
     var btn = form.querySelector('[type="submit"]');
     /* keep the markup, not just the text, so the arrow span survives a submit */
     var btnMarkup = btn ? btn.innerHTML : '';
+    /* Blocks a second click or Enter while a request is in flight. This is a
+       flag plus aria-disabled rather than btn.disabled: disabling the focused
+       button sends focus to <body>, and it does not come back on re-enable,
+       so every keyboard user's next Tab after sending restarted at the top
+       of the page. */
+    var sending = false;
 
     form.addEventListener('submit', function (e) {
       /* This is the fallback the heading above promises, and it has to come
@@ -172,12 +178,14 @@
          on the only way a visitor can reach the practice from the site. */
       if (!window.fetch) { return; }
       e.preventDefault();
+      if (sending) { return; }
       if (!form.checkValidity()) { form.reportValidity(); return; }
       /* clear the text as well as the state classes: the element stays
          rendered now, so a message left over from a previous attempt would
          otherwise sit there unstyled while this one is in flight */
       if (status) { status.className = 'form-status'; status.textContent = ''; }
-      if (btn) { btn.disabled = true; btn.textContent = L.sending; }
+      sending = true;
+      if (btn) { btn.setAttribute('aria-disabled', 'true'); btn.textContent = L.sending; }
 
       fetch(form.action, {
         method: 'POST',
@@ -189,11 +197,19 @@
           show('is-success', form.getAttribute('data-success') || L.success);
         } else {
           res.json().then(function (data) {
-            /* Formspree's own wording when it gives us any, ours otherwise.
-               Theirs is field-level validation ("Email is required"), so it
-               does not get the fall-back-to-email tail. */
-            if (data && data.errors) {
-              show('is-error', data.errors.map(function (x) { return x.message; }).join(', '));
+            /* Formspree's own wording is never shown. It is English only, and
+               its errors array carries form-level failures (form inactive,
+               blocked, not found) as well as field validation, so showing it
+               verbatim told a German visitor "Form is inactive" with no way
+               to reach us. The one field error the browser can let through
+               is the address: type=email accepts anna@gmailcom, Formspree
+               may not. Everything else gets the fall-back-to-email tail. */
+            var errs = (data && data.errors) || [];
+            var badEmail = errs.length && errs.every(function (x) { return x.code === 'TYPE_EMAIL'; });
+            if (badEmail) {
+              show('is-error', L.invalidEmail);
+              var email = form.querySelector('[type="email"]');
+              if (email) { email.focus(); }
             } else {
               show('is-error', L.error, true);
             }
@@ -202,13 +218,13 @@
       }).catch(function () {
         show('is-error', L.network, true);
       }).finally(function () {
-        if (btn) { btn.disabled = false; btn.innerHTML = btnMarkup; }
+        sending = false;
+        if (btn) { btn.removeAttribute('aria-disabled'); btn.innerHTML = btnMarkup; }
       });
 
       /* withEmail appends the address as a real mailto link. It is built as a
-         node rather than interpolated markup on purpose: the Formspree branch
-         above feeds remote strings through this same function, so this must
-         never become innerHTML. */
+         node rather than interpolated markup so that nothing passed in here
+         can ever be parsed as HTML; keep it that way. */
       function show(kind, message, withEmail) {
         if (!status) { return; }
         status.classList.add('form-status', kind, 'is-visible');
